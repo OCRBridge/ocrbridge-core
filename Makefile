@@ -1,5 +1,3 @@
-SHELL := /bin/zsh
-
 UV := uv
 RUFF := ruff
 PYRIGHT := pyright
