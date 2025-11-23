@@ -30,7 +30,10 @@ jobs:
         python -m pip install -e ".[dev]"
     - uses: astral-sh/ruff-action@v3
     - run: ruff check --fix
-    - run: ruff format    
+    - run: ruff format
+    - name: Type check with pyright
+      run: |
+        pyright src/ocrbridge tests
     - name: Test with pytest
       run: |
         pytest
