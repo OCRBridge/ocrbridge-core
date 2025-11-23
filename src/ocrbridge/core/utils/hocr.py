@@ -62,7 +62,7 @@ def parse_hocr(hocr_content: str) -> HOCRInfo:
     has_bounding_boxes = "bbox" in hocr_content
 
     return HOCRInfo(
-        page_count=max(page_count, 1),  # At least 1 page
+        page_count=page_count,
         word_count=word_count,
         has_bounding_boxes=has_bounding_boxes,
     )
@@ -223,9 +223,9 @@ def easyocr_to_hocr(easyocr_results: list, image_width: int, image_height: int) 
         '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">',
         '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">',
         "<head>",
-        '  <meta http-equiv="content-type" content="text/html; charset=utf-8" />',
-        '  <meta name="ocr-system" content="easyocr" />',
-        '  <meta name="ocr-capabilities" content="ocr_page ocr_carea ocr_par ocr_line ocrx_word" />',
+        ' <meta http-equiv="content-type" content="text/html; charset=utf-8" />',
+        ' <meta name="ocr-system" content="easyocr" />',
+        ' <meta name="ocr-capabilities" content="ocr_page ocr_carea ocr_par ocr_line ocrx_word" />',
         "</head>",
         "<body>",
         f'  <div class="ocr_page" id="page_1" title="bbox 0 0 {image_width} {image_height}">',
@@ -264,7 +264,8 @@ def easyocr_to_hocr(easyocr_results: list, image_width: int, image_height: int) 
             word_bbox = word_data["bbox"]
             hocr_lines.append(
                 f'      <span class="ocrx_word" id="word_1_{word_counter}" '
-                f'title="bbox {word_bbox[0]} {word_bbox[1]} {word_bbox[2]} {word_bbox[3]}; x_wconf {conf_percent}">'
+                f'title="bbox {word_bbox[0]} {word_bbox[1]} {word_bbox[2]} '
+                f'{word_bbox[3]}; x_wconf {conf_percent}">'
                 f"{escaped_text}</span>"
             )
 

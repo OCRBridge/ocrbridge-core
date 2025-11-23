@@ -3,6 +3,7 @@
 from pathlib import Path
 
 import pytest
+
 from ocrbridge.core import OCREngine, OCREngineParams
 
 
