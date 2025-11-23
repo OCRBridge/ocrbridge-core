@@ -29,6 +29,8 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install -e ".[dev]"
     - uses: astral-sh/ruff-action@v3
+    - run: ruff check --fix
+    - run: ruff format    
     - name: Test with pytest
       run: |
         pytest
