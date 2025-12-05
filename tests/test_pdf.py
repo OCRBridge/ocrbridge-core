@@ -2,12 +2,12 @@
 
 from pathlib import Path
 from typing import Any
-from unittest.mock import MagicMock
 
 import pytest
+from PIL import Image
+
 from ocrbridge.core.exceptions import OCRProcessingError
 from ocrbridge.core.utils.pdf import convert_pdf_to_images
-from PIL import Image
 
 
 class TestConvertPDFToImages:
@@ -16,11 +16,10 @@ class TestConvertPDFToImages:
     def test_conversion_success(self, mocker: Any, tmp_path: Path) -> None:
         """Test successful conversion."""
         mock_images = [Image.new("RGB", (100, 100), color="white")]
-        
+
         # Mock pdf2image.convert_from_path inside the utils module
         mock_convert = mocker.patch(
-            "ocrbridge.core.utils.pdf.pdf2image.convert_from_path",
-            return_value=mock_images
+            "ocrbridge.core.utils.pdf.pdf2image.convert_from_path", return_value=mock_images
         )
 
         pdf_path = tmp_path / "test.pdf"
@@ -33,13 +32,13 @@ class TestConvertPDFToImages:
         """Test failure handling."""
         mocker.patch(
             "ocrbridge.core.utils.pdf.pdf2image.convert_from_path",
-            side_effect=Exception("Poppler error")
+            side_effect=Exception("Poppler error"),
         )
 
         pdf_path = tmp_path / "test.pdf"
 
         with pytest.raises(OCRProcessingError) as exc_info:
             convert_pdf_to_images(pdf_path)
-        
+
         assert "PDF conversion failed" in str(exc_info.value)
         assert "Poppler error" in str(exc_info.value)

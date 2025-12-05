@@ -7,4 +7,3 @@ logic belongs in the respective engine packages (e.g., ocrbridge-easyocr).
 from . import hocr, pdf
 
 __all__ = ["hocr", "pdf"]
-
