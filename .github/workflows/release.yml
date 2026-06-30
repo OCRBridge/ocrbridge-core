@@ -27,7 +27,7 @@ jobs:
       - name: Setup | Install uv
         uses: astral-sh/setup-uv@fac544c07dec837d0ccb6301d7b5580bf5edae39 # v8.2.0
         with:
-          version: "0.11.21"
+          version: "0.11.26"
 
       - name: Setup | Install Python & Project dependencies
         run: uv sync --extra build
@@ -86,7 +86,7 @@ jobs:
       - name: Setup | Install uv
         uses: astral-sh/setup-uv@fac544c07dec837d0ccb6301d7b5580bf5edae39 # v8.2.0
         with:
-          version: "0.11.21"
+          version: "0.11.26"
 
       - name: Setup | Install Python & Project dependencies
         run: uv sync --extra test
@@ -129,7 +129,7 @@ jobs:
       - name: Setup | Install uv
         uses: astral-sh/setup-uv@fac544c07dec837d0ccb6301d7b5580bf5edae39 # v8.2.0
         with:
-          version: "0.11.21"
+          version: "0.11.26"
 
       - name: Setup | Install Python & Project dependencies
         run: uv sync --extra build
